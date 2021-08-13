@@ -1,5 +1,9 @@
-mov r0 4
-mov r1 5
-add r3 r0  r1
-
+var xyz
+mov R0 $4
+mov R1 $5
+add R3 R0  R1
+mul R1 R1 R7
+div R5 R7
+cmp R6 R1
+mov R5 R2
 hlt

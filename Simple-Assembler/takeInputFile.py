@@ -13,8 +13,9 @@ def takeInput():
     inTempList=fileRead.readlines()
     fileRead.close()
 
-    instructionList=removeEmptyLines(inTempList)
-    # for i in instructionList:
-    #     print(len(i)," ")
-    # print(instructionList)
-    return instructionList
+    #instructionList=removeEmptyLines(inTempList)
+
+    #for i in instructionList:
+        #print(len(i)," ")
+    #print(instructionList)
+    return inTempList
