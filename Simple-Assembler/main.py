@@ -1,4 +1,5 @@
 from takeInputFile import *
+from symbolTableFile import *
 # from binaryInstructionTable import *
 
 
@@ -21,7 +22,7 @@ def immediateToBinary(num):
         subNum="0"+subNum
     return subNum
 
-def binCode(i,length,d,myInstruction):
+def binCode(myInstruction,symbol):
     ansOpcode=""
     termList=myInstruction.split()
     operation=termList[0]
@@ -143,11 +144,11 @@ def binCode(i,length,d,myInstruction):
     elif(operation=="ld"):
         opcode="00100"
         destinationRegister=register[termList[1]][0]
-        if(termList[2] not in d):
+        if(termList[2] not in symbol):
             print("error")
             return
         else:
-            immediateValue=immediateToBinary(d[termList[2]])
+            immediateValue=immediateToBinary(symbol[termList[2]])
         unusedBits=""
         instruction=opcode+unusedBits+destinationRegister+immediateValue
         return instruction
@@ -155,11 +156,11 @@ def binCode(i,length,d,myInstruction):
     elif(operation=="st"):
         opcode="00101"
         destinationRegister=register[termList[1]][0]
-        if(termList[2] not in d):
+        if(termList[2] not in symbol):
             print("error")
             return
         else:
-            immediateValue=immediateToBinary(d[termList[2]])
+            immediateValue=immediateToBinary(symbol[termList[2]])
         unusedBits=""
         instruction=opcode+unusedBits+destinationRegister+immediateValue
         return instruction
@@ -167,15 +168,24 @@ def binCode(i,length,d,myInstruction):
     elif(operation=="hlt"):
         #globals instructionList
         #if(len(instructionList==9)):
-        if(i!=(length-1)):
-            print("error")
-            return
+        # if(i!=(length-1)):
+        #     print("error")
+        #     return
         return "1001100000000000"
+    
+    elif(":" in operation):
+        # here you handle label
+        #just pass the instruction aside from the label
+        myInstruction=' '.join(termList[1:])
+        return binCode(myInstruction,symbol)
+
 
 
 instructionList=takeInput()
 length=len(instructionList)
-
+symbolList=symbolLocation(instructionList)
+# print("The sumbol list is : ")
+# print(symbolList)
 # function to remove the empty lines from the instruction list 
 def removeEmptyLines(myList):
     ansList=[]
@@ -189,28 +199,30 @@ def removeEmptyLines(myList):
 outputFile=open("output.txt","w")
 #iterating over each instruction and converting them to binary and then writing it to output.txt file
 instructionListBinary=[]
-for i in range(len(instructionList)):
-    components=instructionList[i].split()
-    variable=[]
-    if(components[0]=="var"): #var xyz
-        variable.append(components[1])
-    else:
-        k=i
-        break
+# for i in range(len(instructionList)):
+#     components=instructionList[i].split()
+#     variable=[]
+#     if(components[0]=="var"): #var xyz
+#         variable.append(components[1])
+#     else:
+#         k=i
+#         break
 
 #for variables declared on the top of program
-d={} #dictionary with key as variable name and value as its assigned number
-for i in range(len(variable)):
-    d[variable[i]]=length-1+i
+# d={} #dictionary with key as variable name and value as its assigned number
+# for i in range(len(variable)):
+#     d[variable[i]]=length-1+i
 
 for i in range(len(instructionList)):
-    binIns=binCode(i,length,d,instructionList[i])
+    binIns=binCode(instructionList[i],symbolList)
+    print(instructionList[i],"-------",binIns)
     instructionListBinary.append(binIns)
 
 
 
 
-
+print("intsruction list is : ")
+print(instructionList)
     
 
 for i in instructionListBinary:
@@ -219,3 +231,5 @@ for i in instructionListBinary:
         outputFile.write('\n')
 outputFile.close()
 # print(decimalToBinary("7"))
+
+

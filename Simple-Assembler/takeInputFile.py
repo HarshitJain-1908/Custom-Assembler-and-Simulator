@@ -45,7 +45,7 @@ def takeInput():
     locationNum=1
     for i in range(len(inTempList)):
         if(len(inTempList[i])>1):
-            inTempList[i]=inTempList[i]+" "+str(locationNum)
+            inTempList[i]=inTempList[i][0:len(inTempList[i])-1]+" "+str(locationNum)
         locationNum+=1
     instructionList=removeEmptyLines(inTempList)
 
