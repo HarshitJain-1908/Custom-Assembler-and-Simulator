@@ -43,20 +43,14 @@ def takeInput():
 
     #taking input using console
     inTempList=[]
-    i=0
+    # temp=""
+    # while temp != "hlt":
+    #     temp=str((input()))
+    #     inTempList.append(temp)
     while True:
         try:
-            temp=input()
-            i=i+1
+            temp=str((input()))
             inTempList.append(temp)
-            # if "hlt" in temp:
-            #     inp=input()
-            #     i=i+1
-            #     if(inp!=""):
-            #         print("error in line",i)
-            #         return -1
-            #     else:
-            #         break
         except EOFError as e:
             break
     # making a dictionary for each instruction with its original line number in the code
@@ -85,4 +79,8 @@ def takeInput():
 
     
     #sprint(lst,"foo",instructionList,"see")
-    return [lst,instructionList]
+    return lst,instructionList
+
+# ans=takeInput()
+# print(ans[0])
+# print(ans[1])

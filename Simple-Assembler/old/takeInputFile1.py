@@ -37,52 +37,32 @@ def rearrangeVarInList(myList):
 
 # function take a text file as the input and the remove the empty lines and generates the list of each line 
 def takeInput():
+    
     # fileRead=open(r"input.txt","r")
     # inTempList=fileRead.readlines()
     # fileRead.close()
-
-    #taking input using console
     inTempList=[]
-    i=0
-    while True:
-        try:
-            temp=input()
-            i=i+1
-            inTempList.append(temp)
-            # if "hlt" in temp:
-            #     inp=input()
-            #     i=i+1
-            #     if(inp!=""):
-            #         print("error in line",i)
-            #         return -1
-            #     else:
-            #         break
-        except EOFError as e:
-            break
-    # making a dictionary for each instruction with its original line number in the code
-    d={}
-    for i in range(len(inTempList)):
-        if(len(inTempList[i])!=1):
-            d[inTempList[i]]=i+1
+    temp=""
+    while temp != "hlt":
+        temp=str((input()))
+        inTempList.append(temp)
 
-    #print(inTempList," dekho",d)
-    
     # Now adding the location number to the non-empty lines
-    lst=inTempList[:]
-    locationNum=0
-    for i in range(len(lst)):
-        if(len(lst[i])!=0):
-            lst[i]=lst[i]+" "+str(locationNum)+" "+str(d[inTempList[i]])
-        locationNum+=1
-    lst=removeEmptyLines(lst)
     inTempList=rearrangeVarInList(inTempList)
-    locationNum=0
+    for i in inTempList:
+        print(len(i)," ")
+    locationNum=1
     for i in range(len(inTempList)):
         if(len(inTempList[i])!=0):
-            inTempList[i]=inTempList[i]+" "+str(locationNum)+" "+str(d[inTempList[i]])
+            inTempList[i]=inTempList[i]+" "+str(locationNum)
         locationNum+=1
     instructionList=removeEmptyLines(inTempList)
 
-    
-    #sprint(lst,"foo",instructionList,"see")
-    return [lst,instructionList]
+    #for i in instructionList:
+        #print(len(i)," ")
+    #print(instructionList)
+    return instructionList
+
+
+ans=takeInput()
+print(ans)

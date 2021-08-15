@@ -29,6 +29,9 @@ def binCode(line,myInstruction,symbol,d):
     if(operation=="mov"):
         if (termList[1] not in register):
                 s="error in line "+line
+                f.write(s)
+                f.write('\n')
+                #print("error mov")
                 print(s)
                 return -1
 
@@ -55,10 +58,16 @@ def binCode(line,myInstruction,symbol,d):
                     return instruction
                 else:
                     s="error in line "+line
+                    f.write(s)
+                    f.write('\n')
                     print(s)
+                    #print("error mov")
                     return -1
             else:
                 s="error in line "+line
+                f.write(s)
+                f.write('\n')
+                #print("error mov")
                 print(s)
                 return -1
         else:
@@ -72,6 +81,9 @@ def binCode(line,myInstruction,symbol,d):
     elif(operation=="div"):
         if (termList[1] not in register) or (termList[2] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error div")
             print(s)
             return -1
         else:
@@ -85,6 +97,9 @@ def binCode(line,myInstruction,symbol,d):
     elif(operation=="not"):
         if (termList[1] not in register) or (termList[2] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error not")
             print(s)
             return -1
         else:
@@ -98,6 +113,9 @@ def binCode(line,myInstruction,symbol,d):
     elif(operation=="cmp"):
         if (termList[1] not in register) or (termList[2] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error cmp")
             print(s)
             return -1
         else:
@@ -111,6 +129,9 @@ def binCode(line,myInstruction,symbol,d):
     elif(operation=="rs"):
         if (termList[1] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error rs",line)
             print(s)
             return -1
         elif(termList[2][0]=='$'):
@@ -123,12 +144,18 @@ def binCode(line,myInstruction,symbol,d):
             return instruction
         else:
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error rs",line)
             print(s)
             return -1
 
     elif(operation=="ls"):
         if (termList[1] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error ls",line)
             print(s)
             return -1
         elif(termList[2][0]=='$'):
@@ -141,12 +168,18 @@ def binCode(line,myInstruction,symbol,d):
             return instruction
         else:
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error ls",line)
             print(s)
             return -1
 
     elif(operation=="add"):
         if (termList[1] not in register) or (termList[2] not in register) or (termList[3] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error add",line)
             print(s)
             return -1
         else:
@@ -161,6 +194,9 @@ def binCode(line,myInstruction,symbol,d):
     elif(operation=="sub"):
         if (termList[1] not in register) or (termList[2] not in register) or (termList[3] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error sub",line)
             print(s)
             return -1
         else:
@@ -174,7 +210,10 @@ def binCode(line,myInstruction,symbol,d):
     elif(operation=="mul"):
         if (termList[1] not in register) or (termList[2] not in register) or (termList[3] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
             print(s)
+            #print("error mul",line)
             return -1
         else:
             opcode="00110"
@@ -188,7 +227,10 @@ def binCode(line,myInstruction,symbol,d):
     elif(operation=="xor"):
         if (termList[1] not in register) or (termList[2] not in register) or (termList[3] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
             print(s)
+            #print("error xor",line)
             return -1
         else:
             opcode="01010"
@@ -202,6 +244,9 @@ def binCode(line,myInstruction,symbol,d):
     elif(operation=="or"):
         if (termList[1] not in register) or (termList[2] not in register) or (termList[3] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error or",line)
             print(s)
             return -1
         else:
@@ -216,6 +261,9 @@ def binCode(line,myInstruction,symbol,d):
     elif(operation=="and"):
         if (termList[1] not in register) or (termList[2] not in register) or (termList[3] not in register):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
+            #print("error and",line)
             print(s)
             return -1
         else:
@@ -232,7 +280,10 @@ def binCode(line,myInstruction,symbol,d):
         destinationRegister=register[termList[1]][0]
         if((termList[2] not in d) or (termList[1] not in register)):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
             print(s)
+            #print("error ld",line)
             return -1
 
         else:
@@ -246,7 +297,10 @@ def binCode(line,myInstruction,symbol,d):
         destinationRegister=register[termList[1]][0]
         if((termList[2] not in d) or (termList[1] not in register)):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
             print(s)
+            #print("error st",line)
             return -1
         else:
             immediateValue=immediateToBinary(d[termList[2]])
@@ -258,7 +312,10 @@ def binCode(line,myInstruction,symbol,d):
         #unconditional jump
         if(termList[1] not in symbol):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
             print(s)
+            #print("error jmp",line)
             return -1
         else:
             opcode="01111"
@@ -271,7 +328,10 @@ def binCode(line,myInstruction,symbol,d):
     
         if(termList[1] not in symbol):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
             print(s)
+            #print("error in line",line)
             return -1
         else:
             opcode="10000"
@@ -283,10 +343,13 @@ def binCode(line,myInstruction,symbol,d):
     elif(operation=="jgt"):
         if(termList[1] not in symbol):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
             print(s)
+            #print("error in line",line)
             return -1
         else:
-            opcode="10001"
+            opcode="01111"
             unusedBits="000"
             immediateValue=immediateToBinary(symbol[termList[1]])
             instruction=opcode+unusedBits+immediateValue
@@ -296,10 +359,13 @@ def binCode(line,myInstruction,symbol,d):
         
         if(termList[1] not in symbol):
             s="error in line "+line
+            f.write(s)
+            f.write('\n')
             print(s)
+            #print("error in line",line)
             return -1
         else:
-            opcode="10010"
+            opcode="01111"
             unusedBits="000"
             immediateValue=immediateToBinary(symbol[termList[1]])
             instruction=opcode+unusedBits+immediateValue
@@ -311,83 +377,85 @@ def binCode(line,myInstruction,symbol,d):
     elif(":" in operation):
         # here you handle label
         #just pass the instruction aside from the label
-        if(len(termList)==3):
-            pass
-        else:
-            myInstruction=' '.join(termList[1:])
-            return binCode(line,myInstruction,symbol,d)
+        myInstruction=' '.join(termList[1:])
+        return binCode(line,myInstruction,symbol,d)
 
     elif(operation=="var"):
         pass
     else:
         s="error in line "+line
+        f.write(s)
+        f.write('\n')
         print(s)
+        #print("error",line)
         return -1
 
 # writing the machine code in the output text file
-instn=takeInput()
-if(instn!=-1):
-    lst=instn[0]
-    instructionList=instn[1]
-    #print(instructionList,'---',lst)
-    count=0
-    for i in range(len(instructionList)):
-        l=instructionList[i].split()
-        if(l[0][-1]==":"):
-            if(l[1]=="hlt"):
-                count+=1
-                j=i
-        if(l[0]=="hlt"):
-            if(count==0):
-                j=i
+#print("hello world")    
+f=open("output.txt","w")
+lst,instructionList=takeInput()
+#print(instructionList,'@',lst)
+count=0
+for i in range(len(instructionList)):
+    l=instructionList[i].split()
+    if(l[0][-1]==":"):
+        if(l[1]=="hlt"):
             count+=1
-        if(count>1):
-            break
-    if (count==0): #halt error handling
-        print("hlt missing error")
-    elif count>1:
-        line=instructionList[j][-1]
-        print("error in line",line)
+            j=i
+    if(l[0]=="hlt"):
+        if(count==0):
+            j=i
+        count+=1
+    if(count>1):
+        break
+if (count==0): #halt error handling
+    f.write("hlt missing error")
+    f.write('\n')
+    print("hlt missing error")
+elif count>1:
+    line=instructionList[j][-1]
+    s="error in line "+line
+    f.write(s)
+    f.write('\n')
+    print("error in line",line)
 
-    else:
-        variable={}#stores variable name and their actual location.
-        for i in range(len(instructionList)):
-            components=instructionList[i].split()
-            line=instructionList[i][-1]
-            e=0
-            if(components[0]=="var"):
-                if(len(components)!=4):
-                    print("error in line",line)
-                    e=1
-                    break
+else:
+    variable={}#stores variable name and their actual location.
+    for i in range(len(instructionList)):
+        components=instructionList[i].split()
+        #print(components)
+        if(components[0]=="var"):
             #print(components,components[1])
-                else:
-                    variable[components[1]]=int(components[2])
-            else:
-                continue
-        if(e==0):
-            symbolList=symbolLocation(lst,instructionList)
-            if(symbolList==-1):
-                pass
-            else:
+            variable[components[1]]=int(components[2])
+        else:
+            continue
+    
+    symbolList=symbolLocation(lst,instructionList,f)
+    if(symbolList==-1):
+        pass
+    else:
         
         #iterating over each instruction and converting them to binary and then writing it to output.txt file
-                instructionListBinary=[]
+        instructionListBinary=[]
 
-                error=0
+        error=0
         #print(symbolList)
-                for i in range(len(instructionList)):
-                    line=instructionList[i][-1]
-                    binIns=binCode(line,instructionList[i],symbolList,variable)
-                    if(binIns==-1):
-                        error=1
+        for i in range(len(instructionList)):
+            line=instructionList[i][-1]
+            binIns=binCode(line,instructionList[i],symbolList,variable)
+            if(binIns==-1):
+                error=1
                 #print(instructionList[i],"-------",binIns)
-                        break
+                break
             #print(instructionList[i],"-------",binIns)
-                    instructionListBinary.append(binIns)
-                if(error==0):
+            instructionListBinary.append(binIns)
+        if(error==0):
 
-                    for i in instructionListBinary:
+            for i in instructionListBinary:
                 
-                        if i != None:
-                            print(i)
+                if i != None:
+                    print(i)
+                    f.write(i)
+                    f.write('\n')
+
+        f.close()

@@ -1,0 +1,13 @@
+var x
+mov R1 $4
+mov R2 $4
+cmp R1 R2
+
+mov R4 $1
+
+label: hlt
+
+var x
+mov R1 $5
+st R1 x
+hlt

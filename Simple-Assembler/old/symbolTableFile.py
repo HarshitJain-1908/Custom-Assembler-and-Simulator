@@ -1,6 +1,6 @@
 # function to return the location of the variable and the location of the label instruction
 
-def symbolLocation(lst,mylist):
+def symbolLocation(lst,mylist,f):
     # now we make the sublist of labels and variables
     # Basically, making a dictionary with labels and variables with the assumption 
     # that they have been defined only once in the program
@@ -19,6 +19,9 @@ def symbolLocation(lst,mylist):
             flag=1
     if(flag==2):
         line=lst[i][-1]
+        s="error in line "+line
+        f.write(s)
+        f.write('\n')
         print("error in line",line)
         return -1
     
@@ -37,6 +40,9 @@ def symbolLocation(lst,mylist):
                 symbol[termList[0]]=int(termList[-2])
             else:
                 line=lst[i][-1]
+                s="error in line "+line
+                f.write(s)
+                f.write('\n')
                 print("error in line",line)
                 return -1
 
