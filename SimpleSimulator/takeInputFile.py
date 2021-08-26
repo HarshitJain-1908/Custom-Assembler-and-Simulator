@@ -7,8 +7,8 @@ def takeInput():
     # inTempList=fileRead.readlines()
     # fileRead.close()
     # #removing newline character from each instruction
-    # for i in range(len(inTempList)):
-    #     inTempList[i]=inTempList[i][0:(len(inTempList[i])-1)]
+    # for i in range(len(inTempList)-1):
+    #     inTempList[i]=inTempList[i][0:-1]
     #*************************************************************************************************************************
     
     #-------------- uncomment to take input for testing but comment if taking input manually -------------------------
