@@ -150,7 +150,6 @@ def executeInstruction(pc,myInstruction,memoryList):
         subStr=myInstruction[10:]
         dest=subStr[0:3]
         src=subStr[3:]
-        
         #updating the value in the destination register
         destValueQ=register[dest]/register[src]
         destValueR=register[dest]%register[src]
@@ -167,7 +166,6 @@ def executeInstruction(pc,myInstruction,memoryList):
         subStr=myInstruction[5:]
         src=subStr[0:3]
         address=subStr[3:]
-
         #updating the value from the register at the address
         lineNumber=binaryToImmediate(address)
         memoryList[lineNumber]=register[src]
