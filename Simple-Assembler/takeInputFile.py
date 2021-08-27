@@ -3,10 +3,11 @@
 def removeEmptyLines(myList):
     ansList=[]
     for i in myList:
-        # print(i)
-        if(len(i)>3):
+        if i[0]==" ":
+            continue
+        elif(len(i)>3):
             #appending the instruction lines and also removing '\n' from them
-            ansList.append(i.strip())
+            ansList.append(i)
 
     return ansList
 
@@ -39,24 +40,19 @@ def rearrangeVarInList(myList):
 
 # function take a text file as the input and the remove the empty lines and generates the list of each line 
 def takeInput():
+    inTempList=[]
     # fileRead=open(r"input.txt","r")
     # inTempList=fileRead.readlines()
     # fileRead.close()
 
     #taking input using console
-    inTempList=[]
+    
     while True:
         try:
             temp=input()
+            # if(temp=="-1"):
+            #     break
             inTempList.append(temp)
-            # if "hlt" in temp:
-            #     inp=input()
-            #     i=i+1
-            #     if(inp!=""):
-            #         print("error in line",i)
-            #         return -1
-            #     else:
-            #         break
         except EOFError as e:
             break
     # making a dictionary for each instruction with its original line number in the code
@@ -74,7 +70,8 @@ def takeInput():
         if(len(lst[i])!=1):
             lst[i]=lst[i]+" "+str(locationNum)+" "+str(d[inTempList[i]])
         locationNum+=1
-    lst=removeEmptyLines(lst)
+    lst1=removeEmptyLines(lst)
+    # print("lst is : ",lst1)
     # inTempList=removeEmptyLines(inTempList)
     inTempList=rearrangeVarInList(inTempList)
     locationNum=0
@@ -85,7 +82,14 @@ def takeInput():
     # print("hello",inTempList)
     instructionList=removeEmptyLines(inTempList)
     # instructionList=inTempList
-
+    # print("instructionList is : ",instructionList)
     
     # print(d,lst,"foo",instructionList,"see")
-    return [lst,instructionList]
+    return [lst1,instructionList]
+
+# ans=takeInput()
+# print(ans[0])
+# print(ans[1])
+# # ans[1]=removeEmptyLines(ans[1])
+# for i in ans[0]:
+#     print(i," ",len(i))
