@@ -3,9 +3,11 @@
 def removeEmptyLines(myList):
     ansList=[]
     for i in myList:
-        if(len(i)>1):
+        # print(i)
+        if(len(i)>3):
             #appending the instruction lines and also removing '\n' from them
             ansList.append(i.strip())
+
     return ansList
 
 def checkVar(myList):
@@ -43,11 +45,9 @@ def takeInput():
 
     #taking input using console
     inTempList=[]
-    i=0
     while True:
         try:
             temp=input()
-            i=i+1
             inTempList.append(temp)
             # if "hlt" in temp:
             #     inp=input()
@@ -71,18 +71,21 @@ def takeInput():
     lst=inTempList[:]
     locationNum=0
     for i in range(len(lst)):
-        if(len(lst[i])!=0):
+        if(len(lst[i])!=1):
             lst[i]=lst[i]+" "+str(locationNum)+" "+str(d[inTempList[i]])
         locationNum+=1
     lst=removeEmptyLines(lst)
+    # inTempList=removeEmptyLines(inTempList)
     inTempList=rearrangeVarInList(inTempList)
     locationNum=0
     for i in range(len(inTempList)):
-        if(len(inTempList[i])!=0):
+        if(len(inTempList[i])!=1):
             inTempList[i]=inTempList[i]+" "+str(locationNum)+" "+str(d[inTempList[i]])
         locationNum+=1
+    # print("hello",inTempList)
     instructionList=removeEmptyLines(inTempList)
+    # instructionList=inTempList
 
     
-    #sprint(lst,"foo",instructionList,"see")
+    # print(d,lst,"foo",instructionList,"see")
     return [lst,instructionList]

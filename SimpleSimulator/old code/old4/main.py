@@ -1,5 +1,9 @@
 from takeInputFile import takeInput
 from memoryFile import memory
+import matplotlib.pyplot as plt
+
+import os.path
+from os import path 
 
 
 # initializing the program counter
@@ -455,10 +459,20 @@ cycle=0
 stateList=[]
 memoryList=memoryDump(memoryInputList)
 # print(memoryList,"memlist")
+
+#making the list of tuples with cycle and the memory access in decimal as elements of single tuple
+coordinatesList=[]
 while not halted:
     # print("h")
     #getting the instrcution to be executed
     inst=memory(pc,memoryInputList)
+    # pc will always point to memory access(line number) of the program
+    coordinatesList.append((cycle,pc))
+
+    #note that in load and store instructions we are again accessing memories and hence has to plot this too
+    if inst[0:5]=="00101" or inst[0:5]=="00100":
+        memBin=inst[8:]
+        coordinatesList.append((cycle,binaryToImmediate(memBin)))
     #now executing the instruction
     halted,nextpc=executeInstruction(pc,inst,memoryList)
     # if(halted==True):
@@ -483,3 +497,27 @@ for i in memoryList:
     output.write("\n")
     print(i,end="\n")
 output.close()
+
+# print(coordinatesList)
+
+# generating the scatter graph between cycles- memory access
+x,y=zip(*coordinatesList)
+plt.style.use('seaborn')
+plt.scatter(x,y)
+plt.title("Memory Access Trace Graph")
+plt.xlabel("Cycle Number")
+plt.ylabel("Memmory Address (Line Number)")
+plt.show()
+
+#code in order to ouput graph for each test case separately
+testcase=1
+name="output1.png"
+
+while True:
+    if(path.exists(name)):
+        testcase=int(name[6])+1
+        name="output"+str(testcase)+".png"
+    else:
+        plt.savefig(name)
+        break
+        

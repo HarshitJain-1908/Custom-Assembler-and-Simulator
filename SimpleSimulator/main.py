@@ -117,9 +117,13 @@ def executeInstruction(pc,myInstruction,memoryList):
         src1=subStr[3:6]
         src2=subStr[6:9]
 
+        # resetting flags register
+        register["111"]="0000000000000000"
+
         valueDestination=binaryToImmediate(register[src1])+binaryToImmediate(register[src2])
         if(valueDestination>65535):
             # set overflow flag
+            register[dest]=immediateToBinaryRegister(valueDestination)[-16:] #keeping 16 LSBs
             register["111"]=register["111"][:-4]+"1"+register["111"][-3:]
         else:
             #updating the value in the destination register
@@ -138,6 +142,9 @@ def executeInstruction(pc,myInstruction,memoryList):
         dest=subStr[0:3]
         src1=subStr[3:6]
         src2=subStr[6:9]
+
+        # resetting flags register
+        register["111"]="0000000000000000"
 
         valueDestination=binaryToImmediate(register[src1])-binaryToImmediate(register[src2])
         #updating the value in the destination register
@@ -160,9 +167,13 @@ def executeInstruction(pc,myInstruction,memoryList):
         src1=subStr[3:6]
         src2=subStr[6:9]
 
+        # resetting flags register
+        register["111"]="0000000000000000"
+
         valueDestination=binaryToImmediate(register[src1])*binaryToImmediate(register[src2])
         if(valueDestination>65535):
             # overflow
+            register[dest]=immediateToBinaryRegister(valueDestination)[-16:] #keeping 16 LSBs
             register["111"]=register["111"][:-4]+"1"+register["111"][-3:]
         else:
             #updating the value in the destination register
@@ -202,7 +213,7 @@ def executeInstruction(pc,myInstruction,memoryList):
         imm=subStr[3:]
         # now udating the value in the destination register
         shift=binaryToImmediate(imm)
-        destValue=int(binaryToImmediate(register[dest])/shift)
+        destValue=int(binaryToImmediate(register[dest])/(2**shift))
         register[dest]=immediateToBinaryRegister(destValue)
 
         # resetting flags register
@@ -222,7 +233,7 @@ def executeInstruction(pc,myInstruction,memoryList):
         imm=subStr[3:]
         # now udating the value in the destination register
         shift=binaryToImmediate(imm)
-        destValue=int(binaryToImmediate(register[dest])*shift)
+        destValue=int(binaryToImmediate(register[dest])*(2**shift))
         register[dest]=immediateToBinaryRegister(destValue)
 
         # resetting flags register
@@ -344,6 +355,8 @@ def executeInstruction(pc,myInstruction,memoryList):
         #updating the value from the address in the register
         lineNumber=binaryToImmediate(address)
         value=binaryToImmediate(memoryList[lineNumber])
+        # print(memoryList[lineNumber])
+        # print("value",value," ",lineNumber)
         # value=binaryToImmediate(variable)
         register[src]=immediateToBinaryRegister(value)
 
@@ -361,6 +374,9 @@ def executeInstruction(pc,myInstruction,memoryList):
         subStr=myInstruction[10:]
         operand1=register[subStr[0:3]]
         operand2=register[subStr[3:]]
+
+        # resetting flags register
+        register["111"]="0000000000000000"
         value1=binaryToImmediate(operand1)
         value2=binaryToImmediate(operand2)
         # print(value1,"@",value2)
@@ -446,6 +462,8 @@ def executeInstruction(pc,myInstruction,memoryList):
         # this is halt operation
         # here we update pc as -1
         
+        # resetting flags register
+        register["111"]="0000000000000000"
         pc=-1
         return True,pc
 
@@ -520,4 +538,3 @@ while True:
     else:
         plt.savefig(name)
         break
-        

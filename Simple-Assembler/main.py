@@ -134,7 +134,7 @@ def binCode(line,myInstruction,symbol,d):
         elif(termList[2][0]=='$'):
             #first converting the immediate value to proper binary value of 8 bit
             immediateValue=immediateToBinary(termList[2][1:])
-            opcode="01000"
+            opcode="01001"
             destinationRegister=register[termList[1]][0]
             unusedBits=""
             instruction=opcode+unusedBits+destinationRegister+immediateValue
